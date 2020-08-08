@@ -2,8 +2,8 @@
 
 Tool kit for retrieving biological data.
 
-`geoget`    Download GEO raw data  
-`gbshow`    Show Genbank data  
-`geneshow`  Show accessions for a gene  
-`geneseq`   Show sequence for a gene  
+`geoget`    downloads GEO raw data.  
+`gbshow`    shows Genbank data for an accession.  
+`geneshow`  shows accessions for a gene.  
+`geneseq`   shows DNA sequence for a gene.  
 
