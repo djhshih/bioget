@@ -1,0 +1,21 @@
+#!/bin/bash
+# Retrieve GEO data
+
+if (( $# < 1 )); then
+	echo "usage ${0##*/} <GSEnnnnn>"
+	exit 1
+fi
+
+accession=$1
+
+len=$(expr length $accession)
+prefixlen=$(expr $len - 3)
+parent=${accession:0:$prefixlen}nnn
+
+baseurl=ftp://ftp.ncbi.nlm.nih.gov/geo/series
+
+url="$baseurl/${parent}/${accession}/suppl/${accession}_RAW.tar"
+echo $url >&2
+
+curl $url | tar -x
+

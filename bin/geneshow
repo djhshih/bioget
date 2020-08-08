@@ -1,0 +1,20 @@
+#!/bin/bash
+# Print gene accessions
+
+if (( $# < 1 )); then
+	echo "usage: ${0##*/} <entrez-id>" >&2
+	exit 1
+fi
+
+entrez=$1
+
+tool=bioget
+
+baseurl=https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi
+
+entrez_url="$baseurl?db=gene&tool=$tool&id=$entrez&rettype=asn1&retmode=text"
+
+curl -s $entrez_url |
+	sed -n '/^  locus {/, /^  }/p;' |    # extract string inside locus
+	grep 'accession' |                   # keep only lines with accessions
+	sed 's/.*accession "\(.*\)".*/\1/'   # isolate accession

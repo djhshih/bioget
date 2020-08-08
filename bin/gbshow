@@ -1,0 +1,19 @@
+#!/bin/bash
+# Print Genbank data
+
+if (( $# < 1 )); then
+	echo "usage: ${0##*/} <accession> [format]" >&2
+	echo "format options: gb, fasta, xml" >&2
+	exit 1
+fi
+
+accession=$1
+format=${2:-gb}
+
+tool=bioget
+db=nucleotide
+
+baseurl=https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi
+
+url="$baseurl?db=$db&tool=$tool&id=$accession&rettype=$format"
+curl -s $url

@@ -1,0 +1,33 @@
+#!/bin/bash
+# Print gene sequence
+
+if (( $# < 1 )); then
+	echo "usage: ${0##*/} <entrez-id> [format]" >&2
+	echo "format options: fasta, gb, xml" >&2
+	exit 1
+fi
+
+entrez=$1
+format=${2:-fasta}
+
+tool=bioget
+
+baseurl=https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi
+
+entrez_url="$baseurl?db=gene&tool=$tool&id=$entrez&rettype=summary&retmode=text"
+annot=$(curl -s $entrez_url | sed -n '/Annotation/p')
+
+accession=$(echo "$annot" | cut -d ' ' -f 4)
+coord=$(expr "$annot" : '.*(\([0-9]\+\.\.[0-9]\+\).*')
+from=${coord%..*}
+to=${coord#*..}
+
+if [[ $annot =~ 'complement' ]]; then
+	strand=2
+else
+	strand=1
+fi
+
+url="$baseurl?db=nucleotide&tool=$tool&id=$accession&seq_start=$from&seq_stop=$to&strand=$strand&rettype=$format"
+curl -s $url
+
