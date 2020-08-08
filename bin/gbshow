@@ -3,7 +3,7 @@
 
 if (( $# < 1 )); then
 	echo "usage: ${0##*/} <accession> [format]" >&2
-	echo "format options: gb, fasta, xml" >&2
+	echo "format options: gb, fasta" >&2
 	exit 1
 fi
 

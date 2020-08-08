@@ -3,7 +3,7 @@
 
 if (( $# < 1 )); then
 	echo "usage: ${0##*/} <entrez-id> [format]" >&2
-	echo "format options: fasta, gb, xml" >&2
+	echo "format options: fasta, gb" >&2
 	exit 1
 fi
 
