@@ -1,5 +1,5 @@
 #!/bin/bash
-# Retrieve GEO data
+# Download GEO raw data
 
 if (( $# < 1 )); then
 	echo "usage ${0##*/} <GSEnnnnn>"

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Print gene sequence
+# Show sequence for a gene
 
 if (( $# < 1 )); then
 	echo "usage: ${0##*/} <entrez-id> [format]" >&2

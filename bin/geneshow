@@ -1,5 +1,5 @@
 #!/bin/bash
-# Print gene accessions
+# Show accessions for a gene
 
 if (( $# < 1 )); then
 	echo "usage: ${0##*/} <entrez-id>" >&2
