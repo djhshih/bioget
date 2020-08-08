@@ -2,7 +2,7 @@
 # Download GEO raw data
 
 if (( $# < 1 )); then
-	echo "usage ${0##*/} <GSEnnnnn>"
+	echo "usage: ${0##*/} <GSEnnnnn>"
 	exit 1
 fi
 
